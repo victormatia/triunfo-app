@@ -104,6 +104,9 @@ class Form extends React.Component {
           />
         </label>
 
+        {/* linha de código temporária */}
+        <input checked={ hasTrunfo } type="checkbox" name="" id="" />
+
         <button
           htmlFor="save-button"
           type="submit"
