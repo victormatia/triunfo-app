@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
+  onFormSubmit = (event) => {
+    event.preventDefault();
+  };
+
   render() {
     const {
       cardName,
@@ -19,7 +23,7 @@ class Form extends React.Component {
     } = this.props;
 
     return (
-      <form>
+      <form onSubmit={ this.onFormSubmit }>
         {/* htmlFor é um identificador para o label, sem ele o lint reclama */}
         <label htmlFor="name-input">
           Nome
@@ -47,7 +51,7 @@ class Form extends React.Component {
         <label htmlFor="attr1-input">
           Atributo 1
           <input
-            type="text"
+            type="number"
             name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
@@ -58,7 +62,7 @@ class Form extends React.Component {
         <label htmlFor="attr2-input">
           Atributo 2
           <input
-            type="text"
+            type="number"
             name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
@@ -69,7 +73,7 @@ class Form extends React.Component {
         <label htmlFor="attr3-input">
           Atributo 3
           <input
-            type="text"
+            type="number"
             name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
