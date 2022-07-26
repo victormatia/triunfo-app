@@ -1,7 +1,7 @@
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 main {
@@ -33,8 +33,8 @@ form, form label {
   display: flex;
   flex-direction: column;
   height: 500px;
-  width: 350px;
   position: relative;
+  width: 350px;
 }
 
 .card-title {
@@ -42,6 +42,6 @@ form, form label {
 }
 
 .card-image {
-  width: 90%;
   height: 80%;
+  width: 90%;
 }
