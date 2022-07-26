@@ -25,6 +25,7 @@ class Form extends React.Component {
           Nome
           <input
             type="text"
+            name="cardName"
             value={ cardName }
             onChange={ onInputChange }
             data-testid="name-input"
@@ -34,18 +35,20 @@ class Form extends React.Component {
         <label htmlFor="description-input">
           Descrição
           <textarea
+            name="cardDescription"
             value={ cardDescription }
             onChange={ onInputChange }
             data-testid="description-input"
           >
-            Descreva a carta aqui
+            {/* texto */}
           </textarea>
         </label>
 
         <label htmlFor="attr1-input">
           Atributo 1
           <input
-            type="number"
+            type="text"
+            name="cardAttr1"
             value={ cardAttr1 }
             onChange={ onInputChange }
             data-testid="attr1-input"
@@ -55,7 +58,8 @@ class Form extends React.Component {
         <label htmlFor="attr2-input">
           Atributo 2
           <input
-            type="number"
+            type="text"
+            name="cardAttr2"
             value={ cardAttr2 }
             onChange={ onInputChange }
             data-testid="attr2-input"
@@ -65,7 +69,8 @@ class Form extends React.Component {
         <label htmlFor="attr3-input">
           Atributo 3
           <input
-            type="number"
+            type="text"
+            name="cardAttr3"
             value={ cardAttr3 }
             onChange={ onInputChange }
             data-testid="attr3-input"
@@ -76,6 +81,7 @@ class Form extends React.Component {
           Imagem
           <input
             type="text"
+            name="cardImage"
             value={ cardImage }
             onChange={ onInputChange }
             data-testid="image-input"
@@ -84,6 +90,7 @@ class Form extends React.Component {
 
         <select
           htmlFor="rare-input"
+          name="cardRare"
           value={ cardRare }
           onChange={ onInputChange }
           data-testid="rare-input"
@@ -97,7 +104,7 @@ class Form extends React.Component {
           Super Trunfo
           <input
             type="checkbox"
-            name="super-trunfo"
+            name="cardTrunfo"
             checked={ cardTrunfo }
             onChange={ onInputChange }
             data-testid="trunfo-input"
@@ -105,7 +112,7 @@ class Form extends React.Component {
         </label>
 
         {/* linha de código temporária */}
-        <input checked={ hasTrunfo } type="checkbox" name="" id="" />
+        <input checked={ hasTrunfo } type="checkbox" />
 
         <button
           htmlFor="save-button"
