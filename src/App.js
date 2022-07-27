@@ -16,6 +16,7 @@ class App extends React.Component {
       cardRare: '',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
+      savedCards: [],
     };
   }
 
@@ -60,6 +61,43 @@ class App extends React.Component {
     this.setState({ [name]: isChecked }, this.verifyInputsValues);
   };
 
+  onSaveButtonClick = () => {
+    this.setState((prevState) => {
+      const {
+        cardName,
+        cardDescription,
+        cardAttr1,
+        cardAttr2,
+        cardAttr3,
+        cardImage,
+        cardRare,
+        cardTrunfo,
+      } = this.state;
+
+      return {
+        savedCards: [...prevState.savedCards,
+          {
+            name: cardName, // Em atribuições de chaves com o mesmo nome, podemos usar a propria chave como o valor, ao invés de cardName: cardName,
+            description: cardDescription,
+            attr1: cardAttr1,
+            attr2: cardAttr2,
+            attr3: cardAttr3,
+            image: cardImage,
+            rare: cardRare,
+            isTrunfo: cardTrunfo,
+          }],
+        cardName: '',
+        cardDescription: '',
+        cardImage: '',
+        cardAttr1: '0',
+        cardAttr2: '0',
+        cardAttr3: '0',
+        cardRare: 'Normal',
+        cardTrunfo: false,
+      };
+    });
+  }
+
   render() {
     const {
       cardName,
@@ -87,6 +125,7 @@ class App extends React.Component {
             cardTrunfo={ cardTrunfo }
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onInputChange={ this.onInputChange }
+            onSaveButtonClick={ this.onSaveButtonClick }
           />
         </div>
 
