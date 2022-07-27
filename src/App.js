@@ -9,11 +9,11 @@ class App extends React.Component {
     this.state = {
       cardName: '',
       cardDescription: '',
-      cardAttr1: '',
-      cardAttr2: '',
-      cardAttr3: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
       cardImage: '',
-      cardRare: '',
+      cardRare: 'Normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       savedCards: [],
@@ -59,6 +59,7 @@ class App extends React.Component {
     const { name, value, checked } = target;
     const isChecked = value === 'on' ? checked : value;
     this.setState({ [name]: isChecked }, this.verifyInputsValues);
+    this.verifySuperTrunfo();
   };
 
   onSaveButtonClick = () => {
@@ -98,6 +99,11 @@ class App extends React.Component {
     });
   }
 
+  verifySuperTrunfo = () => {
+    const { savedCards } = this.state;
+    return savedCards.some((card) => card.isTrunfo);
+  }
+
   render() {
     const {
       cardName,
@@ -126,6 +132,7 @@ class App extends React.Component {
             isSaveButtonDisabled={ isSaveButtonDisabled }
             onInputChange={ this.onInputChange }
             onSaveButtonClick={ this.onSaveButtonClick }
+            hasTrunfo={ this.verifySuperTrunfo() }
           />
         </div>
 
