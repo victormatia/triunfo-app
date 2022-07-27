@@ -80,9 +80,9 @@ class App extends React.Component {
           {
             name: cardName, // Em atribuições de chaves com o mesmo nome, podemos usar a propria chave como o valor, ao invés de cardName: cardName,
             description: cardDescription,
-            attr1: cardAttr1,
-            attr2: cardAttr2,
-            attr3: cardAttr3,
+            firstAttr: cardAttr1,
+            secondAttr: cardAttr2,
+            thirdAttr: cardAttr3,
             image: cardImage,
             rare: cardRare,
             isTrunfo: cardTrunfo,
@@ -115,39 +115,60 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
+      savedCards,
     } = this.state;
 
     return (
       <main>
-        <div className="form-sec">
-          <Form
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-            isSaveButtonDisabled={ isSaveButtonDisabled }
-            onInputChange={ this.onInputChange }
-            onSaveButtonClick={ this.onSaveButtonClick }
-            hasTrunfo={ this.verifySuperTrunfo() }
-          />
-        </div>
+        <section className="fisrt-screen">
+          <div className="form-sec">
+            <Form
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+              isSaveButtonDisabled={ isSaveButtonDisabled }
+              onInputChange={ this.onInputChange }
+              onSaveButtonClick={ this.onSaveButtonClick }
+              hasTrunfo={ this.verifySuperTrunfo() }
+            />
+          </div>
+          <div className="card-sec">
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </div>
+        </section>
 
-        <div className="card-sec">
-          <Card
-            cardName={ cardName }
-            cardDescription={ cardDescription }
-            cardAttr1={ cardAttr1 }
-            cardAttr2={ cardAttr2 }
-            cardAttr3={ cardAttr3 }
-            cardImage={ cardImage }
-            cardRare={ cardRare }
-            cardTrunfo={ cardTrunfo }
-          />
-        </div>
+        <section className="second-screen">
+          <p>Todas as cartas</p>
+          {
+            savedCards.map((card) => ( // lembre-se que map deve retornar um array de objetos html, por isso usamos os () no lugar das {}.
+              <Card
+                key={ card.name }
+                cardName={ card.name }
+                cardDescription={ card.description }
+                cardAttr1={ card.firstAttr }
+                cardAttr2={ card.secondAttr }
+                cardAttr3={ card.thirdAttr }
+                cardImage={ card.image }
+                cardRare={ card.rare }
+                cardTrunfo={ card.isTrunfo }
+              />
+            ))
+          }
+        </section>
       </main>
     );
   }
