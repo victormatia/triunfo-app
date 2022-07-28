@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Form from './components/Form';
 import Card from './components/Card';
+import DeleteButton from './components/DeleteButton';
 
 class App extends React.Component {
   constructor() {
@@ -104,6 +105,11 @@ class App extends React.Component {
     return savedCards.some((card) => card.isTrunfo);
   }
 
+  deleteCard = ({ target }) => {
+    const { savedCards } = this.state;
+    this.setState({ savedCards: savedCards.filter((card) => card.name !== target.name) });
+  }
+
   render() {
     const {
       cardName,
@@ -152,22 +158,28 @@ class App extends React.Component {
         </section>
 
         <section className="second-screen">
-          <p>Todas as cartas</p>
-          {
-            savedCards.map((card) => ( // lembre-se que map deve retornar um array de objetos html, por isso usamos os () no lugar das {}.
-              <Card
-                key={ card.name }
-                cardName={ card.name }
-                cardDescription={ card.description }
-                cardAttr1={ card.firstAttr }
-                cardAttr2={ card.secondAttr }
-                cardAttr3={ card.thirdAttr }
-                cardImage={ card.image }
-                cardRare={ card.rare }
-                cardTrunfo={ card.isTrunfo }
-              />
-            ))
-          }
+          <section className="filter-sec">
+            <p>Todas as cartas</p>
+          </section>
+          <section className="card-saved-sec">
+            {
+              savedCards.map((card) => ( // lembre-se que map deve retornar um array de objetos html, por isso usamos os () no lugar das {}.
+                <div key={ card.name }>
+                  <Card
+                    cardName={ card.name }
+                    cardDescription={ card.description }
+                    cardAttr1={ card.firstAttr }
+                    cardAttr2={ card.secondAttr }
+                    cardAttr3={ card.thirdAttr }
+                    cardImage={ card.image }
+                    cardRare={ card.rare }
+                    cardTrunfo={ card.isTrunfo }
+                  />
+                  <DeleteButton deleteCard={ this.deleteCard } name={ card.name } />
+                </div>
+              ))
+            }
+          </section>
         </section>
       </main>
     );

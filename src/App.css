@@ -4,17 +4,25 @@
   padding: 0;
 }
 
-.fisrt-screen {
+.fisrt-screen, .second-screen {
   display: flex;
   justify-content: center;
 }
 
-.form-sec, .card-sec {
+.form-sec, .card-sec, .filter-sec, .card-saved-sec {
   align-items: center;
   display: flex;
   flex-basis: 50%;
   height: 100vh;
   justify-content: center;
+}
+
+.form-sec {
+  background-color: rgb(224, 224, 224);
+}
+
+.card-sec {
+  background-color: rgba(22, 53, 32, 0.868);
 }
 
 input {
@@ -44,4 +52,8 @@ form, form label {
 .card-image {
   height: 80%;
   width: 90%;
+}
+
+.card-saved-sec {
+  flex-wrap: wrap;
 }
