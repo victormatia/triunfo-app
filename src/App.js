@@ -3,6 +3,7 @@ import './App.css';
 import Form from './components/Form';
 import Card from './components/Card';
 import DeleteButton from './components/DeleteButton';
+import Filter from './components/Filter';
 
 class App extends React.Component {
   constructor() {
@@ -18,6 +19,7 @@ class App extends React.Component {
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       savedCards: [],
+      filter: '',
     };
   }
 
@@ -110,6 +112,20 @@ class App extends React.Component {
     this.setState({ savedCards: savedCards.filter((card) => card.name !== target.name) });
   }
 
+  saveFilter = ({ target }) => {
+    this.setState({ filter: target.value });
+  }
+
+  filterCards = () => { // a lógica ainda n funciona
+    const { savedCards, filter } = this.state;
+
+    const filteredCards = savedCards.filter((card) => card.name.includes(filter));
+
+    if (filter.length === 0) {
+      return savedCards;
+    } return filteredCards;
+  }
+
   render() {
     const {
       cardName,
@@ -121,7 +137,7 @@ class App extends React.Component {
       cardRare,
       cardTrunfo,
       isSaveButtonDisabled,
-      savedCards,
+      filter,
     } = this.state;
 
     return (
@@ -160,10 +176,11 @@ class App extends React.Component {
         <section className="second-screen">
           <section className="filter-sec">
             <p>Todas as cartas</p>
+            <Filter filter={ filter } saveFilter={ this.saveFilter } />
           </section>
           <section className="card-saved-sec">
             {
-              savedCards.map((card) => ( // lembre-se que map deve retornar um array de objetos html, por isso usamos os () no lugar das {}.
+              this.filterCards().map((card) => ( // lembre-se que map deve retornar um array de objetos html, por isso usamos os () no lugar das {}.
                 <div key={ card.name }>
                   <Card
                     cardName={ card.name }
