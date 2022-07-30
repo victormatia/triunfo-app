@@ -15,11 +15,14 @@ class App extends React.Component {
       cardAttr2: '0',
       cardAttr3: '0',
       cardImage: '',
-      cardRare: 'Normal',
+      cardRare: 'normal',
       cardTrunfo: false,
       isSaveButtonDisabled: true,
       savedCards: [],
-      filter: '',
+      filter: {
+        name: '',
+        rarity: '',
+      },
     };
   }
 
@@ -81,7 +84,7 @@ class App extends React.Component {
       return {
         savedCards: [...prevState.savedCards,
           {
-            name: cardName, // Em atribuições de chaves com o mesmo nome, podemos usar a propria chave como o valor, ao invés de cardName: cardName,
+            name: cardName,
             description: cardDescription,
             firstAttr: cardAttr1,
             secondAttr: cardAttr2,
@@ -96,7 +99,7 @@ class App extends React.Component {
         cardAttr1: '0',
         cardAttr2: '0',
         cardAttr3: '0',
-        cardRare: 'Normal',
+        cardRare: 'normal',
         cardTrunfo: false,
       };
     });
@@ -113,18 +116,52 @@ class App extends React.Component {
   }
 
   saveFilter = ({ target }) => {
-    this.setState({ filter: target.value });
+    this.setState(({ filter }) => {
+      if (target.name === 'name') {
+        return {
+          filter: {
+            [target.name]: target.value,
+            rarity: filter.rarity,
+          },
+        };
+      } if (target.name === 'rarity') {
+        return {
+          filter: {
+            name: filter.name,
+            [target.name]: target.value,
+          },
+        };
+      }
+    });
   }
 
-  filterCards = () => { // a lógica ainda n funciona
+  filterCardsToName = () => {
+    const { savedCards, filter } = this.state;
+    const filteredCards = savedCards.filter((card) => card.name.includes(filter.name));
+
+    return filteredCards;
+  }
+
+  filterCardsToRarity = () => {
+    const { savedCards, filter } = this.state;
+    const filteredCards = savedCards.filter((card) => card.rare === filter.rarity);
+    if (filter.rarity === 'todas') return savedCards;
+
+    return filteredCards;
+  }
+
+  filterCards = () => {
     const { savedCards, filter } = this.state;
 
-    const filteredCards = savedCards.filter((card) => card.name.includes(filter));
-
-    if (filter.length === 0) {
-      return savedCards;
-    } return filteredCards;
-  }
+    if (filter.name.length > 0 && filter.rarity.length > 0) {
+      return this.filterCardsToRarity().filter((card) => card.name.includes(filter.name));
+    } if (filter.name.length > 0) {
+      return this.filterCardsToName();
+    } if (filter.rarity.length > 0) {
+      return this.filterCardsToRarity();
+    }
+    return savedCards;
+  };
 
   render() {
     const {
