@@ -12,6 +12,7 @@ class Filter extends React.Component {
           type="text"
           name="name"
           value={ filter.name }
+          disabled={ filter.isTrunfo }
           onChange={ saveFilter }
           placeholder="Digite o nome"
           data-testid="name-filter"
@@ -19,6 +20,7 @@ class Filter extends React.Component {
         <select
           name="rarity"
           defaultValue="Todas"
+          disabled={ filter.isTrunfo }
           onChange={ saveFilter }
           data-testid="rare-filter"
         >
@@ -27,6 +29,16 @@ class Filter extends React.Component {
           <option value="raro">Raro</option>
           <option value="muito raro">Muito raro</option>
         </select>
+        <label htmlFor="super-trufo" data-testid="trunfo-filter">
+          Super Trunfo
+          <input
+            type="checkbox"
+            name="isTrunfo"
+            checked={ filter.isTrunfo }
+            onChange={ saveFilter }
+
+          />
+        </label>
       </label>
     );
   }
@@ -36,6 +48,7 @@ Filter.propTypes = {
   filter: PropTypes.shape({
     name: PropTypes.string.isRequired,
     rarity: PropTypes.string.isRequired,
+    isTrunfo: PropTypes.bool.isRequired,
   }).isRequired,
   saveFilter: PropTypes.func.isRequired,
 };

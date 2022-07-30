@@ -5,7 +5,7 @@ import Card from './components/Card';
 import DeleteButton from './components/DeleteButton';
 import Filter from './components/Filter';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -22,6 +22,7 @@ class App extends React.Component {
       filter: {
         name: '',
         rarity: '',
+        isTrunfo: false,
       },
     };
   }
@@ -122,6 +123,7 @@ class App extends React.Component {
           filter: {
             [target.name]: target.value,
             rarity: filter.rarity,
+            ifTrunfo: filter.isTrunfo,
           },
         };
       } if (target.name === 'rarity') {
@@ -129,6 +131,15 @@ class App extends React.Component {
           filter: {
             name: filter.name,
             [target.name]: target.value,
+            ifTrunfo: filter.isTrunfo,
+          },
+        };
+      } if ((target.name === 'isTrunfo')) {
+        return {
+          filter: {
+            name: filter.name,
+            rarity: filter.rarity,
+            [target.name]: target.checked,
           },
         };
       }
@@ -153,13 +164,12 @@ class App extends React.Component {
   filterCards = () => {
     const { savedCards, filter } = this.state;
 
+    if (filter.isTrunfo) return savedCards.filter((card) => card.isTrunfo);
     if (filter.name.length > 0 && filter.rarity.length > 0) {
       return this.filterCardsToRarity().filter((card) => card.name.includes(filter.name));
-    } if (filter.name.length > 0) {
-      return this.filterCardsToName();
-    } if (filter.rarity.length > 0) {
-      return this.filterCardsToRarity();
     }
+    if (filter.name.length > 0) return this.filterCardsToName();
+    if (filter.rarity.length > 0) return this.filterCardsToRarity();
     return savedCards;
   };
 
@@ -209,7 +219,6 @@ class App extends React.Component {
             />
           </div>
         </section>
-
         <section className="second-screen">
           <section className="filter-sec">
             <p>Todas as cartas</p>
@@ -239,5 +248,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default App;
