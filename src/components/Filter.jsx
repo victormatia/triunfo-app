@@ -29,14 +29,14 @@ class Filter extends React.Component {
           <option value="raro">Raro</option>
           <option value="muito raro">Muito raro</option>
         </select>
-        <label htmlFor="super-trufo" data-testid="trunfo-filter">
+        <label htmlFor="super-trufo">
           Super Trunfo
           <input
             type="checkbox"
             name="isTrunfo"
             checked={ filter.isTrunfo }
             onChange={ saveFilter }
-
+            data-testid="trunfo-filter"
           />
         </label>
       </label>

@@ -40,21 +40,17 @@ export default class App extends React.Component {
     const stringValidation = cardName.length > 0
       && cardDescription.length > 0
       && cardImage.length > 0;
-
     const maxValue = 210;
     const maxAtt = 90;
     const sumAttrValdation = parseInt(cardAttr1, 10)
       + parseInt(cardAttr2, 10)
       + parseInt(cardAttr3, 10)
       <= maxValue;
-
     const att1 = parseInt(cardAttr1, 10) <= maxAtt && parseInt(cardAttr1, 10) >= 0;
     const att2 = parseInt(cardAttr2, 10) <= maxAtt && parseInt(cardAttr2, 10) >= 0;
     const att3 = parseInt(cardAttr3, 10) <= maxAtt && parseInt(cardAttr3, 10) >= 0;
     const maxAttValidation = att1 && att2 && att3;
-
     const attValidation = sumAttrValdation && maxAttValidation;
-
     if (stringValidation && attValidation) {
       this.setState({ isSaveButtonDisabled: false });
     } else {
@@ -174,18 +170,8 @@ export default class App extends React.Component {
   };
 
   render() {
-    const {
-      cardName,
-      cardDescription,
-      cardAttr1,
-      cardAttr2,
-      cardAttr3,
-      cardImage,
-      cardRare,
-      cardTrunfo,
-      isSaveButtonDisabled,
-      filter,
-    } = this.state;
+    const { cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage,
+      cardRare, cardTrunfo, isSaveButtonDisabled, filter } = this.state;
 
     return (
       <main>
